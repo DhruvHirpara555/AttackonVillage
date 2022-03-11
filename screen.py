@@ -26,7 +26,7 @@ class Screen:
     def draw_object(self, Object):
         for y in range(Object.size_y):
             for x in range(Object.size_x):
-                self.screen[y+Object.pos_y][x+Object.pos_x] = Object.matrix[y][x]
+                self.screen[y+Object.pos_y][x+Object.pos_x] = Object.color + Back.BLACK + Object.matrix[y][x] + Fore.RESET + Back.RESET
     def moveC (self,y, x):
         print("\033[%d;%dH" % (y, x))
 

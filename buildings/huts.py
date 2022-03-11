@@ -1,9 +1,9 @@
-from buildings import Buuildings
+from buildings.buildings import Buildings
 from colorama import Fore, Back, Style
 import numpy as np
 
 
-class Huts(Buuildings):
+class Huts(Buildings):
 
     def __init__(self,x,y,game):
         size_x = 2
