@@ -11,20 +11,22 @@ class Screen:
 
 
 
-    def __init__(self, width, height):
+    def __init__(self, width, height,):
         self.width = width
         self.height = height
-        self.screen = np.array([[Back.GREEN+' '+Back.RESET  for x in range(self.width)] for y in range(self.height)],dtype=object)
+        self.screen = np.array([[Back.WHITE+' '+Back.RESET  for x in range(self.width)] for y in range(self.height)],dtype=object)
         self.clear()
 
 
     def blank(self):
-        self.screen =np.array( [[Back.GREEN+' '+ Back.RESET  for x in range(self.width)] for y in range(self.height)],dtype=object)
-    #cleat terminal for next frame to render
+        self.screen =np.array( [[Back.WHITE+' '+ Back.RESET  for x in range(self.width)] for y in range(self.height)],dtype=object)
+
     def clear(self):
         os.system('cls' if os.name == 'nt' else 'clear')
-    def draw(self, x, y, char):
-        self.screen[y][x] = char
+    def draw_object(self, Object):
+        for y in range(Object.size_y):
+            for x in range(Object.size_x):
+                self.screen[y+Object.pos_y][x+Object.pos_x] = Object.matrix[y][x]
     def moveC (self,y, x):
         print("\033[%d;%dH" % (y, x))
 
