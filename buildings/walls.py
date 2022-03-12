@@ -12,8 +12,8 @@ class Walls(Buildings):
         super().__init__(x,y,size_x,size_y,matrix,game,maxhealth)
 
     def delete_building(self):
-        self.game.walls = np.delete(self.game.walls,self.game.walls.index(self))
-        self.game.objects = np.delete(self.game.objects,self.game.objects.index(self))
+        self.game.walls = np.delete(self.game.walls,self.game.walls.index(self)).tolist()
+        self.game.objects = np.delete(self.game.objects,self.game.objects.index(self)).tolist()
         del self
 
 

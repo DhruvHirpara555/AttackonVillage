@@ -12,8 +12,9 @@ class Object_Game:
         self.game = game
 
 
-        self.health = maxhealth,
+
         self.maxhealth = maxhealth
+        self.health = self.maxhealth
 
         self.color = color
 

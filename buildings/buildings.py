@@ -9,8 +9,8 @@ class Buildings(Object_Game):
         super().__init__(x,y,size_x,size_y,matrix,game,maxhealth,color)
 
     def delete_building(self):
-        self.game.buildings = delete(self.game.buildings,self.game.buildings.index(self))
-        self.game.objects = delete(self.game.objects,self.game.objects.index(self))
+        self.game.buildings = delete(self.game.buildings,self.game.buildings.index(self)).tolist()
+        self.game.objects = delete(self.game.objects,self.game.objects.index(self)).tolist()
         del self
 
     def curr_status(self):
