@@ -1,5 +1,5 @@
 
-from troops.troops import Troops
+from src.troops.troops import Troops
 import time
 import sys
 from colorama import Fore, Back, Style

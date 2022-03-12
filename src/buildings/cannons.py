@@ -1,4 +1,4 @@
-from buildings.buildings import Buildings
+from src.buildings.buildings import Buildings
 import time
 import numpy as np
 from colorama import Fore, Back, Style

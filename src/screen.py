@@ -1,6 +1,5 @@
 
 
-# store all screens that are printed in game_data
 import os
 from colorama import Fore, Back, Style
 import numpy as np
@@ -45,7 +44,15 @@ class Screen:
             for i in range(10-int(self.game.troops[0].health/self.game.troops[0].maxhealth*10)):
                 tmp += ' '
         else:
-            tmp += ' DEAD'
+            tmp += '          '
+
+        tmp += "Barb not spawned: {}".format(self.game.barbcount-self.game.totalspawned)
+        tmp += " Heal remaining: {}".format(self.game.healspellcount)
+        tmp += " Rage remaining: {}".format(self.game.ragecount)
+
+        if(self.game.barbcount-self.game.totalspawned <10):
+            tmp += " "
+        self.game.screens_replay.append(tmp)
 
 
         sys.stdout.write(tmp)

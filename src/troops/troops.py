@@ -1,6 +1,6 @@
 
 import time
-from objects_game import Object_Game
+from src.objects_game import Object_Game
 from colorama import Fore, Back, Style
 import numpy as np
 

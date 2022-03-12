@@ -1,4 +1,4 @@
-from troops.troops import Troops
+from src.troops.troops import Troops
 
 from colorama import Fore, Back, Style
 import numpy as np

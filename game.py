@@ -1,26 +1,26 @@
 
 
 import os
-from re import T
+
 
 from numpy import append, save
-from buildings.buildings import *
-from buildings.townhall import Townhall
-from buildings.huts import Huts
-from buildings.walls import Walls
-from buildings.cannons import Cannons
+from src.buildings.buildings import *
+from src.buildings.townhall import Townhall
+from src.buildings.huts import Huts
+from src.buildings.walls import Walls
+from src.buildings.cannons import Cannons
 
-from screen import Screen
-import sys
-from input import *
+from src.screen import Screen
+
+from src.input import *
 import time
-from objects_game import Object_Game
+from src.objects_game import Object_Game
 from colorama import Fore, Back, Style
-from troops.king import King
-from troops.barbarian import Barbarian
+from src.troops.king import King
+from src.troops.barbarian import Barbarian
 import pickle as pkl
 
-from troops.troops import Troops
+from src.troops.troops import Troops
 
 class Game:
 
@@ -40,12 +40,13 @@ class Game:
         self.kingisalive = True
         self.spawningpoints_x = []
         self.spawningpoints_y = []
-        self.barbcount = 4
+        self.barbcount = 15
         self.totalspawned = 0
         self.healspellcount = 2
         self.ragecount = 2
         self.ragemultiplier = 1
         self.last_rage = time.time()
+        self.screens_replay = []
 
         self.gen_spawningpoints()
 
@@ -104,7 +105,7 @@ class Game:
         self.cannons.append(Cannons(90,24,self))
         self.objects.append(self.cannons[0])
         self.buildings.append(self.cannons[0])
-        self.cannons.append(Cannons(4,4,self))
+        self.cannons.append(Cannons(13,15,self))
         self.objects.append(self.cannons[1])
         self.buildings.append(self.cannons[1])
 
@@ -135,11 +136,9 @@ class Game:
 
 
     def play(self):
-        screens_replay = []
 
         while not self.isgameover():
 
-            #store all screens in a list
 
 
 
@@ -247,7 +246,7 @@ class Game:
                 # self.frame.clear()
                 self.frame.moveC(0,0)
                 self.frame.prt()
-                screens_replay.append(self.frame.screen)
+                # screens_replay.append(self.frame.screen)
                 self.last_frame = time.time()
                 self.frame.blank()
                 # print(self.troops[0].last_attacked,time.time())
@@ -255,14 +254,14 @@ class Game:
 
         # save
         filename = input("Enter filename for replay to be saved in: ")
-        file = open(filename, 'wb')
-        pkl.dump(screens_replay, file)
+        file = open("./replay/"+filename, 'wb')
+        pkl.dump(self.screens_replay, file)
         file.close()
-        print("Replay saved! UwU")
+        print("Replay saved!")
 
 
 
 
+game = Game()
 
-
-
+game.play()

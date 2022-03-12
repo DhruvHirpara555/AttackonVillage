@@ -1,5 +1,5 @@
 
-from buildings.buildings import *
+from src.buildings.buildings import *
 import numpy as np
 from colorama import Fore, Back, Style
 class Townhall(Buildings):

@@ -1,6 +1,6 @@
 
 from numpy import delete
-from objects_game import Object_Game
+from src.objects_game import Object_Game
 from colorama import Fore, Back, Style
 
 class Buildings(Object_Game):
