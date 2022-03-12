@@ -38,12 +38,14 @@ class Screen:
             for x in range(self.width):
                 tmp += self.screen[y][x]
             tmp += '\n'
-        tmp += "King's Health: "
+        tmp += "King's Health:"
         if(self.game.kingisalive):
             for i in range(int(self.game.troops[0].health/self.game.troops[0].maxhealth*10)):
                 tmp += '|'
             for i in range(10-int(self.game.troops[0].health/self.game.troops[0].maxhealth*10)):
                 tmp += ' '
+        else:
+            tmp += ' DEAD'
 
 
         sys.stdout.write(tmp)

@@ -3,7 +3,7 @@
 import os
 from re import T
 
-from numpy import append
+from numpy import append, save
 from buildings.buildings import *
 from buildings.townhall import Townhall
 from buildings.huts import Huts
@@ -18,6 +18,7 @@ from objects_game import Object_Game
 from colorama import Fore, Back, Style
 from troops.king import King
 from troops.barbarian import Barbarian
+import pickle as pkl
 
 from troops.troops import Troops
 
@@ -39,8 +40,10 @@ class Game:
         self.kingisalive = True
         self.spawningpoints_x = []
         self.spawningpoints_y = []
-        self.barbcount = 20
+        self.barbcount = 4
         self.totalspawned = 0
+        self.healspellcount = 2
+        self.ragecount = 2
         self.ragemultiplier = 1
         self.last_rage = time.time()
 
@@ -132,8 +135,12 @@ class Game:
 
 
     def play(self):
+        screens_replay = []
 
         while not self.isgameover():
+
+            #store all screens in a list
+
 
 
             for obj in self.objects:
@@ -179,11 +186,15 @@ class Game:
                     self.genbarb(4)
 
                 if(key_stroke == 'h'):
-                    for obj in self.troops:
-                        obj.health = min(obj.health*(1.5) , obj.maxhealth)
+                    if(self.healspellcount > 0):
+                        self.healspellcount-=1
+                        for obj in self.troops:
+                            obj.health = min(obj.health*(1.5) , obj.maxhealth)
                 if(key_stroke == 'r'):
-                    self.ragemultiplier = 2*self.ragemultiplier
-                    self.last_rage = time.time()
+                    if(self.ragecount>0):
+                        self.ragecount-=1
+                        self.ragemultiplier = 2*self.ragemultiplier
+                        self.last_rage = time.time()
 
             if(time.time() - self.last_rage > 4):
                 self.ragemultiplier = max(1,self.ragemultiplier/2)
@@ -236,10 +247,21 @@ class Game:
                 # self.frame.clear()
                 self.frame.moveC(0,0)
                 self.frame.prt()
+                screens_replay.append(self.frame.screen)
                 self.last_frame = time.time()
                 self.frame.blank()
                 # print(self.troops[0].last_attacked,time.time())
                 # print(self.kingisalive)
+
+        # save
+        filename = input("Enter filename for replay to be saved in: ")
+        file = open(filename, 'wb')
+        pkl.dump(screens_replay, file)
+        file.close()
+        print("Replay saved! UwU")
+
+
+
 
 
 

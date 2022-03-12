@@ -32,13 +32,17 @@ class Barbarian(Troops):
                     mindistance = objdistance
                     mindistanceobj = obj
 
-        next_x = 0 if (mindistanceobj.pos_x-self.pos_x)==0 else abs(mindistanceobj.pos_x-self.pos_x)/(mindistanceobj.pos_x-self.pos_x)
-        next_y = 0 if (mindistanceobj.pos_y - self.pos_y)==0 else abs(mindistanceobj.pos_y - self.pos_y)/(mindistanceobj.pos_y - self.pos_y)
+        if mindistanceobj != None:
 
-        if(abs(mindistanceobj.pos_x-self.pos_x) > abs(mindistanceobj.pos_y - self.pos_y)):
-            return(self.pos_x + next_x,self.pos_y)
-        else :
-            return(self.pos_x,self.pos_y+next_y)
+            next_x = 0 if (mindistanceobj.pos_x-self.pos_x)==0 else abs(mindistanceobj.pos_x-self.pos_x)/(mindistanceobj.pos_x-self.pos_x)
+            next_y = 0 if (mindistanceobj.pos_y - self.pos_y)==0 else abs(mindistanceobj.pos_y - self.pos_y)/(mindistanceobj.pos_y - self.pos_y)
+
+            if(abs(mindistanceobj.pos_x-self.pos_x) > abs(mindistanceobj.pos_y - self.pos_y)):
+                return(self.pos_x + next_x,self.pos_y)
+            else :
+                return(self.pos_x,self.pos_y+next_y)
+        else:
+            return(self.pos_x,self.pos_y)
 
     def movebarb(self):
         x,y = self.getnextblock()
