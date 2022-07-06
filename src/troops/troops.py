@@ -6,13 +6,13 @@ import numpy as np
 
 
 class Troops(Object_Game):
-    def __init__(self, x, y, size_x, size_y, matrix, game, maxhealth, damage, attack_speed,attack_range):
+    def __init__(self, x, y, size_x, size_y, matrix, game, maxhealth, damage, attack_speed):
         super().__init__(x, y, size_x, size_y, matrix, game, maxhealth )
         self.damage = damage
         self.attack_speed = attack_speed
         self.last_attacked = time.time()
         self.color = Fore.RED
-        self.attack_range = attack_range
+        # self.attack_range = attack_range
         self.health = maxhealth
 
 
@@ -34,19 +34,7 @@ class Troops(Object_Game):
             self.delete_troops()
 
 
-    def attack_melee(self):
-        objecttoattack = []
-        for obj in self.game.buildings:
-            if(self.buildingonattackfeild(obj)):
-                objecttoattack.append(obj)
-        for obj in self.game.walls:
-            if(self.buildingonattackfeild(obj)):
-                objecttoattack.append(obj)
-        for obj in objecttoattack:
-            obj.health -= self.damage
-            self.last_attacked = time.time()
-            self.color = Fore.WHITE
-            obj.curr_status()
+
 
 
 

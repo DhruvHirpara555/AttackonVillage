@@ -25,7 +25,7 @@ class Cannons(Buildings):
         mindistobject = None
         mindist = 7
         for troop in self.game.troops:
-            if self.distance(troop) <= mindist:
+            if troop.troop_type=="ground" and self.distance(troop) <= mindist:
                 mindistobject = troop
                 mindist = self.distance(troop)
         if mindistobject is not None:

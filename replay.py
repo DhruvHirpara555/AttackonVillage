@@ -22,8 +22,9 @@ os.system('clear')
 
 for i in range(len(screens)):
 
-
-    sys.stdout.write(screens[i] + "\033[0;0H")
+    os.system('clear')
+    sys.stdout.write(screens[i])
+    # sys.stdout.write(screens[i] + "\033[0;0H")
     time.sleep(1/framerate + 0.1)
     # move cursor to top left
 

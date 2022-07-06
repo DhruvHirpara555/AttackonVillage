@@ -7,15 +7,16 @@ import numpy as np
 
 class Barbarian(Troops):
 
-    def __init__(self, x, y, game, damage, attack_speed, attack_range):
+    def __init__(self, x, y, game, damage, attack_speed):
         size_x = 1
         size_y = 1
         matrix = np.array([['B' for x in range(size_x)] for y in range(size_y)], dtype=object)
         maxhealth = 100
         self.last_moved = time.time()
         self.movespeed = 10
+        self.troop_type = "ground"
 
-        super().__init__(x, y, size_x, size_y, matrix, game, maxhealth, damage, attack_speed, attack_range)
+        super().__init__(x, y, size_x, size_y, matrix, game, maxhealth, damage, attack_speed)
 
 
 
@@ -23,14 +24,20 @@ class Barbarian(Troops):
         mindistanceobj = None
         mindistance = -1
         for obj in self.game.buildings :
-            objdistance = abs(obj.pos_x-self.pos_x) + abs(obj.pos_y-self.pos_y)
-            if mindistanceobj == None:
-                mindistance = objdistance
-                mindistanceobj = obj
-            else:
-                if(objdistance < mindistance):
-                    mindistance = objdistance
-                    mindistanceobj = obj
+            for y in range(obj.size_y):
+                for x in range(obj.size_x):
+                    objdistance = abs(self.pos_x - x - obj.pos_x) + abs(self.pos_y - y - obj.pos_y)
+                    if(objdistance < mindistance or mindistance == -1):
+                        mindistance = objdistance
+                        mindistanceobj = obj
+            # objdistance = abs(obj.pos_x-self.pos_x) + abs(obj.pos_y-self.pos_y)
+            # if mindistanceobj == None:
+            #     mindistance = objdistance
+            #     mindistanceobj = obj
+            # else:
+            #     if(objdistance < mindistance):
+            #         mindistance = objdistance
+            #         mindistanceobj = obj
 
         if mindistanceobj != None:
 
@@ -44,13 +51,14 @@ class Barbarian(Troops):
         else:
             return(self.pos_x,self.pos_y)
 
-    def movebarb(self):
+    def movetroop(self):
         x,y = self.getnextblock()
 
-        if(self.game.frame.screen[int(y)][int(x)] == Back.WHITE+' '+Back.RESET or self.game.frame.screen[int(y)][int(x)] == self.color + Back.BLACK + 'B' + Fore.RESET + Back.RESET):
+        if(self.game.frame.screen[int(y)][int(x)] == Back.WHITE+' '+Back.RESET or self.game.frame.screen[int(y)][int(x)] == Fore.RED + Back.BLACK + 'B' + Fore.RESET + Back.RESET or self.game.frame.screen[int(y)][int(x)] == Fore.YELLOW + Back.BLACK + 'B' + Fore.RESET + Back.RESET or self.game.frame.screen[int(y)][int(x)] == Fore.CYAN + Back.BLACK + 'B' + Fore.RESET + Back.RESET  or self.game.frame.screen[int(y)][int(x)] == Fore.RED + Back.BLACK + 'A' + Fore.RESET + Back.RESET or self.game.frame.screen[int(y)][int(x)] == Fore.YELLOW + Back.BLACK + 'A' + Fore.RESET + Back.RESET or self.game.frame.screen[int(y)][int(x)] == Fore.CYAN + Back.BLACK + 'A' + Fore.RESET + Back.RESET):
 
                 self.pos_x = x
                 self.pos_y = y
+                self.last_moved = time.time()
 
 
     # def coll_check(self):
@@ -61,7 +69,7 @@ class Barbarian(Troops):
     #     else:
     #         return False
 
-    def attack_melee(self):
+    def attack(self):
         coordinates = self.getnextblock()
         next_x = coordinates[0]
         next_y = coordinates[1]

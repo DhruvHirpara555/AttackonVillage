@@ -61,6 +61,10 @@ python3 replay.py
 
 ## How to Play
 
-* W,A,S,D - For movement of King
-- 1, 2, 3, 4 to spawn barbarians from spawning points corresponding to the key
+* W,A,S,D - For movement of King Or Queen
+* [SPACE] for normal king or Queen attack
+* "L" for special king or queen attack 
+- 1, 2, 3 to spawn barbarians from spawning points corresponding to the key
+- 4,5,6 to spawn archers from spawning points corresponding to the key
+- 7,8,9 to spawn balloons from spawning points corresponding to the key
 * R - Rage Spell H - Heal spell

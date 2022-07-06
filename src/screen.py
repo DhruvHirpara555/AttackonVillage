@@ -38,7 +38,7 @@ class Screen:
                 tmp += self.screen[y][x]
             tmp += '\n'
         tmp += "King's Health:"
-        if(self.game.kingisalive):
+        if(self.game.leadisalive):
             for i in range(int(self.game.troops[0].health/self.game.troops[0].maxhealth*10)):
                 tmp += '|'
             for i in range(10-int(self.game.troops[0].health/self.game.troops[0].maxhealth*10)):
@@ -46,11 +46,16 @@ class Screen:
         else:
             tmp += '          '
 
-        tmp += "Barb not spawned: {}".format(self.game.barbcount-self.game.totalspawned)
+        # tmp += "Barb not spawned: {}".format(self.game.barbcount-self.game.barbspawned)
+        tmp += " Lead : {}".format(self.game.lead)
         tmp += " Heal remaining: {}".format(self.game.healspellcount)
         tmp += " Rage remaining: {}".format(self.game.ragecount)
+        tmp += "\n Barbs remaining: {}".format(self.game.barbcount - self.game.barbspawned)
+        tmp += "\n Archers remaining: {}".format(self.game.archcount - self.game.archspawned)
+        tmp += "\n Balloons remaining: {}".format(self.game.looncount - self.game.loonspawned)
 
-        if(self.game.barbcount-self.game.totalspawned <10):
+
+        if(self.game.barbcount-self.game.barbspawned <10):
             tmp += " "
         self.game.screens_replay.append(tmp)
 
